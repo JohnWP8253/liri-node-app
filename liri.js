@@ -40,7 +40,10 @@ function concert() {
     var concertURL = `https://rest.bandsintown.com/artists/${input}/events?app_id=codingbootcamp`;
 
     axios.get(concertURL).then(function(response){
-        
+        for (var i = 0; i < response.data.length; i++){
+            
+            console.log(`\nVenue Name: ${response.data[i].venue.name}\nLocated in: ${response.data[i].venue.city}, ${response.data[i].venue.country} \nDate and Time: ${moment(response.data[i].datetime).format("MM/DD/YYYY LT")}\n\n########################################`);
+        }
     })
     
 }
