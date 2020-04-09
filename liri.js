@@ -55,14 +55,20 @@ function concert() {
 }
 
 function music() {
-    if (command === 'spotify-this-song' && process.argv[3] === undefined) {
-        input = 'Vogue';
-    };
+  if (command === "spotify-this-song" && process.argv[3] === undefined) {
+    input = "Vogue";
+  }
 
-    spotify.search({type: 'track', query: input, limit: 1}, function(err, data){
-        if (err) {
-            return console.log(`An error occured: ${err}`);
-        }
-        console.log(`\n########################################\n\nArtist(s): ${data.tracks.items[0].artists[0].name}\nSong Name: ${data.tracks.items[0].name}\nPreview Link: ${data.tracks.items[0].preview_url}\nAlbum: ${data.tracks.items[0].album.name}\n\n########################################`)
-    });
+  spotify.search({ type: "track", query: input, limit: 1 }, function (
+    err,
+    data
+  ) {
+    if (err) {
+      return console.log(`An error occured: ${err}`);
+    } else {
+      console.log(
+        `\n########################################\n\nArtist(s): ${data.tracks.items[0].artists[0].name}\nSong Name: ${data.tracks.items[0].name}\nPreview Link: ${data.tracks.items[0].preview_url}\nAlbum: ${data.tracks.items[0].album.name}\n\n########################################`
+      );
+    }
+  });
 }
