@@ -15,7 +15,7 @@ var Spotify = require("node-spotify-api");
 var spotify = new Spotify(keys.spotify);
 
 var command = process.argv[2];
-// Slice and rejoin incase artist or band has spaces in the name
+// Slice and rejoin in case artist or band has spaces in the name
 var input = process.argv.slice(3).join(" ");
 console.log(command, input);
 
