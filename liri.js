@@ -17,9 +17,9 @@ var spotify = new Spotify(keys.spotify);
 var command = process.argv[2];
 // Slice and rejoin in case artist or band has spaces in the name
 var input = process.argv.slice(3).join(" ");
-console.log(command, input);
+// console.log(command, input);
 
-// use of switch statement to switch between functions
+// use of switch statement to switch between functions through commands
 switch (command) {
   case "concert-this":
     concert();
@@ -38,6 +38,10 @@ switch (command) {
 }
 // Function to call information from REST API for Bands In Town
 function concert() {
+
+  if (command === "concert-this" && process.argv[3] === undefined) {
+    input = "Celine Dion";
+  }
   var concertURL = `https://rest.bandsintown.com/artists/${input}/events?app_id=codingbootcamp`;
 
   axios.get(concertURL).then(function (response) {
@@ -52,6 +56,7 @@ function concert() {
       );
     }
   });
+  logCommands(command, input);
 }
 
 function music() {
@@ -71,6 +76,7 @@ function music() {
       );
     }
   });
+  logCommands(command, input);
 }
 
 function movie() {
@@ -84,28 +90,44 @@ function movie() {
       `\n########################################\n\nTitle: ${response.data.Title}\nYear: ${response.data.Year}\nIMDB Rating: ${response.data.imdbRating}\nRotten Tomatoes Rating: ${response.data.Ratings[1].Value}\nCountry: ${response.data.Country}\nLanguage: ${response.data.Language}\nPlot: ${response.data.Plot}\nActors: ${response.data.Actors}\n\n########################################`
     );
   });
+  logCommands(command, input);
 }
 
 function random() {
   fs.readFile("random.txt", "utf8", function (error, data) {
     // If the code experiences any errors it will log the error to the console.
     if (error) {
-      return console.log(data);
+      return console.log(error);
     }
 
     var dataArr = data.split(",");
     console.log(dataArr);
-    if (dataArr[0] === 'spotify-this-song') {
+    if (dataArr[0] === "spotify-this-song") {
       input = dataArr[1];
       music();
-    } else if (dataArr[0] === 'concert-this') {
+    } else if (dataArr[0] === "concert-this") {
       input = dataArr[1];
       concert();
-    } else if (dataArr[0] === 'movie-this') {
+    } else if (dataArr[0] === "movie-this") {
       input = dataArr[1];
       movie();
     } else {
-      console.log (`Oi! Need a command you nit!`)
+      console.log(`Oi! Need a command! What were you thinking?`);
     }
   });
+}
+
+function logCommands (command, input) {
+  fs.appendFile("log.txt", `${command} ${input}`, function(err) {
+    // If an error was experienced we will log it.
+    if (err) {
+      console.log(err);
+    }
+  
+    // If no error is experienced, we'll log the phrase "Content Added" to our node console.
+    else {
+
+      console.log(`\nThe command ${command} was successful.\n As was the input ${input}.\n`);
+}
+});
 }
