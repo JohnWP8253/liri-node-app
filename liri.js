@@ -72,3 +72,40 @@ function music() {
     }
   });
 }
+
+function movie() {
+  if (command === "movie-this" && process.argv[3] === undefined) {
+    input = "Jaws";
+  }
+  var OMDBUrl = `http://www.omdbapi.com/?t=${input}&y=&plot=short&apikey=trilogy`;
+
+  axios.get(OMDBUrl).then(function (response) {
+    console.log(
+      `\n########################################\n\nTitle: ${response.data.Title}\nYear: ${response.data.Year}\nIMDB Rating: ${response.data.imdbRating}\nRotten Tomatoes Rating: ${response.data.Ratings[1].Value}\nCountry: ${response.data.Country}\nLanguage: ${response.data.Language}\nPlot: ${response.data.Plot}\nActors: ${response.data.Actors}\n\n########################################`
+    );
+  });
+}
+
+function random() {
+  fs.readFile("random.txt", "utf8", function (error, data) {
+    // If the code experiences any errors it will log the error to the console.
+    if (error) {
+      return console.log(data);
+    }
+
+    var dataArr = data.split(",");
+    console.log(dataArr);
+    if (dataArr[0] === 'spotify-this-song') {
+      input = dataArr[1];
+      music();
+    } else if (dataArr[0] === 'concert-this') {
+      input = dataArr[1];
+      concert();
+    } else if (dataArr[0] === 'movie-this') {
+      input = dataArr[1];
+      movie();
+    } else {
+      console.log (`Oi! Need a command you nit!`)
+    }
+  });
+}
