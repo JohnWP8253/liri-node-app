@@ -118,7 +118,7 @@ function random() {
 }
 
 function logCommands (command, input) {
-  fs.appendFile("log.txt", `${command} ${input}`, function(err) {
+  fs.appendFile("log.txt", `${command},  ${input} `, function(err) {
     // If an error was experienced we will log it.
     if (err) {
       console.log(err);
@@ -127,7 +127,7 @@ function logCommands (command, input) {
     // If no error is experienced, we'll log the phrase "Content Added" to our node console.
     else {
 
-      console.log(`\nThe command ${command} was successful.\n As was the input ${input}.\n`);
+      console.log(`\nThe command ${command} was logged.\n The input ${input} was also logged.\n`);
 }
 });
 }
