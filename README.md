@@ -60,9 +60,9 @@ The purpose was to use "backend" technologies only. Node.js was used along with 
 1. To search for information on a movie, simply type:   `node liri.js movie-this <movie name here>` in the terminal. 
 
 ## Screenshots and videos
-Link to the video: https://bit.ly/3a7OIBI
+Link to the video: https://1drv.ms/v/s!AsTLbKRukIAN9BZTh-LmILQGLcyh?e=elxZIQ
 ## Links
-Link to video: https://bit.ly/3a7OIBI
+Link to video: https://1drv.ms/v/s!AsTLbKRukIAN9BZTh-LmILQGLcyh?e=elxZIQ
 Link to repository: https://github.com/JohnWP8253/liri-node-app
 
 ## Tech used
